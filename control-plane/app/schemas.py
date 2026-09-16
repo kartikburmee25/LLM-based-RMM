@@ -63,6 +63,9 @@ class JobCreateRequest(BaseModel):
 class JobResponse(BaseModel):
     id: uuid.UUID
     device_id: uuid.UUID
+    idempotency_key: str | None
+    script_content: str
+    timeout_seconds: int
     status: JobStatus
     exit_code: int | None
     stdout: str | None
@@ -70,7 +73,9 @@ class JobResponse(BaseModel):
     stdout_truncated: bool
     stderr_truncated: bool
     duration_ms: int | None
+    created_by_api_key_id: uuid.UUID
     created_at: datetime
+    deadline_at: datetime
     dispatched_at: datetime | None
     completed_at: datetime | None
 
